@@ -1,5 +1,6 @@
 package ua.yatsergray.football.manager.service.impl;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.yatsergray.football.manager.domain.dto.TeamDTO;
@@ -9,21 +10,25 @@ import ua.yatsergray.football.manager.exception.NoSuchTeamException;
 import ua.yatsergray.football.manager.exception.TeamAlreadyExistsException;
 import ua.yatsergray.football.manager.mapper.TeamMapper;
 import ua.yatsergray.football.manager.repository.TeamRepository;
+import ua.yatsergray.football.manager.repository.TransferRepository;
 import ua.yatsergray.football.manager.service.TeamService;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Transactional
 @Service
 public class TeamServiceImpl implements TeamService {
-    private final TeamMapper teamMapper;
     private final TeamRepository teamRepository;
+    private final TransferRepository transferRepository;
+    private final TeamMapper teamMapper;
 
     @Autowired
-    public TeamServiceImpl(TeamMapper teamMapper, TeamRepository teamRepository) {
-        this.teamMapper = teamMapper;
+    public TeamServiceImpl(TeamRepository teamRepository, TransferRepository transferRepository, TeamMapper teamMapper) {
         this.teamRepository = teamRepository;
+        this.transferRepository = transferRepository;
+        this.teamMapper = teamMapper;
     }
 
     @Override
@@ -73,6 +78,7 @@ public class TeamServiceImpl implements TeamService {
             throw new NoSuchTeamException(String.format("Team with id=\"%s\" does not exist", teamId));
         }
 
+        transferRepository.deleteAll(transferRepository.findAvailableToDeleteByTeamId(teamId));
         teamRepository.deleteById(teamId);
     }
 }

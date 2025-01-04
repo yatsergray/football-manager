@@ -22,4 +22,12 @@ public class TeamDTO {
     @JsonProperty("players")
     @Builder.Default
     private List<PlayerDTO> playerDTOList = new ArrayList<>();
+
+    @JsonProperty("sellingTransfers")
+    @Builder.Default
+    private List<TransferDTO> sellingTransferDTOList = new ArrayList<>();
+
+    @JsonProperty("buyingTransfers")
+    @Builder.Default
+    private List<TransferDTO> buyingTransferDTOList = new ArrayList<>();
 }

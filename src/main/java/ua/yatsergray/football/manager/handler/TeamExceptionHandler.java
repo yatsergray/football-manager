@@ -3,6 +3,7 @@ package ua.yatsergray.football.manager.handler;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import ua.yatsergray.football.manager.exception.InsufficientTeamBankAccountBalanceException;
 import ua.yatsergray.football.manager.exception.NoSuchTeamException;
 import ua.yatsergray.football.manager.exception.TeamAlreadyExistsException;
 
@@ -16,6 +17,11 @@ public class TeamExceptionHandler {
 
     @ExceptionHandler(TeamAlreadyExistsException.class)
     public ResponseEntity<String> handleTeamAlreadyExistsException(TeamAlreadyExistsException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+
+    @ExceptionHandler(InsufficientTeamBankAccountBalanceException.class)
+    public ResponseEntity<String> handleInsufficientTeamBankAccountBalanceException(InsufficientTeamBankAccountBalanceException e) {
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 }

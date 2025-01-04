@@ -36,6 +36,14 @@ public class Team {
     @Builder.Default
     private Set<Player> players = new LinkedHashSet<>();
 
+    @OneToMany(mappedBy = "sellingTeam")
+    @Builder.Default
+    private Set<Transfer> sellingTransfers = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "buyingTeam")
+    @Builder.Default
+    private Set<Transfer> buyingTransfers = new LinkedHashSet<>();
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;

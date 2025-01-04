@@ -1,17 +1,15 @@
 insert into teams (id, name, commission_percentage, bank_account_balance)
-values
-    ('ae204b8f-7fa3-46bd-a2c2-165e88d50eb9', 'Dynamo Kyiv', 5, 1000000.00),
-    ('55c2bf52-1af1-44e4-9402-b435d2e09932', 'Shakhtar Donetsk', 7, 1500000.00);
+values ('8a02f3d3-7e26-4467-a6ff-10bdf8a4bb90', 'Real Madrid', 5, 300000000.00),
+       ('f96b53e8-8d02-4f58-b79e-d8d2e6e43145', 'Manchester City', 7, 250000000.00);
 
 insert into players (id, first_name, last_name, age, months_of_experience, team_id)
-values
-    ('4d129aae-fec3-4cb1-88b3-ff1a4587bbb8', 'Georgiy', 'Bushchan', 29, 120, 'ae204b8f-7fa3-46bd-a2c2-165e88d50eb9'),
-    ('91f88268-f46f-4ca9-bb22-0ee6a9cb57a5', 'Oleksandr', 'Tymchyk', 26, 96, 'ae204b8f-7fa3-46bd-a2c2-165e88d50eb9'),
-    ('875d3f1b-1419-4743-b623-25ecc676314d', 'Denys', 'Popov', 24, 72, 'ae204b8f-7fa3-46bd-a2c2-165e88d50eb9'),
-    ('d9c80d95-ca4d-46b0-b043-2aef052bfd0f', 'Vitaliy', 'Buyalskyi', 30, 144, 'ae204b8f-7fa3-46bd-a2c2-165e88d50eb9'),
-    ('907d1b56-7e83-4835-955d-bc799de76142', 'Vladyslav', 'Vanat', 21, 48, 'ae204b8f-7fa3-46bd-a2c2-165e88d50eb9'),
-    ('26a0486b-c6b8-4da6-91e8-c400fe2a3e04', 'Dmytro', 'Riznyk', 26, 96, '55c2bf52-1af1-44e4-9402-b435d2e09932'),
-    ('46b11c29-273b-4e3a-b57a-3d6283c1b730', 'Yukhym', 'Konoplia', 24, 72, '55c2bf52-1af1-44e4-9402-b435d2e09932'),
-    ('cf16cee8-f860-45ab-824d-7ee9c14c278b', 'Mykola', 'Matviyenko', 27, 108, '55c2bf52-1af1-44e4-9402-b435d2e09932'),
-    ('8f00589e-cec9-4c58-b0de-cc895a9efb14', 'Oleksandr', 'Zubkov', 26, 96, '55c2bf52-1af1-44e4-9402-b435d2e09932'),
-    ('5b635ceb-ac91-4814-bee9-87f75d72bdc2', 'Danylo', 'Sikan', 22, 60, '55c2bf52-1af1-44e4-9402-b435d2e09932');
+values ('01d8b832-9c90-4f74-b098-236340b6f501', 'Thibaut', 'Courtois', 31, 156, '8a02f3d3-7e26-4467-a6ff-10bdf8a4bb90'),
+       ('e6a5e409-bf63-4576-a362-4e8e80d1bfa9', 'Luka', 'Modric', 38, 228, '8a02f3d3-7e26-4467-a6ff-10bdf8a4bb90'),
+       ('7ac6a259-9f25-43c8-a8d8-763b29d6fc4e', 'Vinicius', 'Junior', 23, 84, '8a02f3d3-7e26-4467-a6ff-10bdf8a4bb90'),
+       ('b4d34525-9424-4cbb-8f9f-6ff51b0af846', 'Eduardo', 'Camavinga', 21, 48, '8a02f3d3-7e26-4467-a6ff-10bdf8a4bb90'),
+       ('f5cbba47-d8eb-494c-8c8b-dcb6904184dc', 'Toni', 'Kroos', 33, 192, '8a02f3d3-7e26-4467-a6ff-10bdf8a4bb90'),
+       ('843d12a5-ecc3-4c63-a8bb-63d6e4038f4c', 'Erling', 'Haaland', 23, 84, 'f96b53e8-8d02-4f58-b79e-d8d2e6e43145'),
+       ('4f8f0b7d-cd99-43c5-a60e-7d74803e43c4', 'Kevin', 'De Bruyne', 32, 180, 'f96b53e8-8d02-4f58-b79e-d8d2e6e43145'),
+       ('c6c7e786-6c55-43a9-9f02-781ef0b79243', 'Phil', 'Foden', 23, 60, 'f96b53e8-8d02-4f58-b79e-d8d2e6e43145'),
+       ('3d3b7129-0bd7-4ddf-a786-9f0cfc9e0e12', 'Ruben', 'Dias', 26, 108, 'f96b53e8-8d02-4f58-b79e-d8d2e6e43145'),
+       ('8a3f1237-7bc2-47a9-8f24-7c68d7a9e8b2', 'Jack', 'Grealish', 28, 144, 'f96b53e8-8d02-4f58-b79e-d8d2e6e43145');
