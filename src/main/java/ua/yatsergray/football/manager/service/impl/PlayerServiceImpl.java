@@ -132,7 +132,7 @@ public class PlayerServiceImpl implements PlayerService {
         return transferMapper.mapToTransferDTO(transferRepository.save(transfer));
     }
 
-    private BigDecimal calculateTotalTransferCost(Integer playerMonthsOfExperience, Integer playerAge, Integer buyingTeamCommissionPercentage) {
+    public BigDecimal calculateTotalTransferCost(Integer playerMonthsOfExperience, Integer playerAge, Integer buyingTeamCommissionPercentage) {
         BigDecimal baseTransferCost = new BigDecimal(playerMonthsOfExperience)
                 .multiply(new BigDecimal(100000))
                 .divide(new BigDecimal(playerAge), RoundingMode.HALF_UP)
