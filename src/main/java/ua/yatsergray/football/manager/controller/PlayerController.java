@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.yatsergray.football.manager.domain.dto.PlayerDTO;
+import ua.yatsergray.football.manager.domain.dto.TransferDTO;
 import ua.yatsergray.football.manager.domain.request.PlayerCreateRequest;
 import ua.yatsergray.football.manager.domain.request.PlayerUpdateRequest;
+import ua.yatsergray.football.manager.domain.request.TransferCreateRequest;
 import ua.yatsergray.football.manager.service.impl.PlayerServiceImpl;
 
 import java.util.List;
@@ -53,5 +55,11 @@ public class PlayerController {
         playerService.removePlayerById(playerId);
 
         return ResponseEntity.ok().build();
+    }
+
+    @SneakyThrows
+    @PostMapping("/{playerId}/transfer")
+    public ResponseEntity<TransferDTO> transferPlayerById(@PathVariable("playerId") UUID playerId, @Valid @RequestBody TransferCreateRequest transferCreateRequest) {
+        return ResponseEntity.ok(playerService.transferPlayerById(playerId, transferCreateRequest.getBuyingTeamId()));
     }
 }

@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -35,6 +37,10 @@ public class Player {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id", nullable = false)
     private Team team;
+
+    @OneToMany(mappedBy = "player")
+    @Builder.Default
+    private Set<Transfer> transfers = new LinkedHashSet<>();
 
     @Override
     public final boolean equals(Object o) {

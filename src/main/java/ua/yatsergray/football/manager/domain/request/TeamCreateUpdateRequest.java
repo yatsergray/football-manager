@@ -23,6 +23,6 @@ public class TeamCreateUpdateRequest {
 
     @NotNull(message = "Bank account balance is mandatory")
     @DecimalMin(value = "0.00", message = "Bank account balance must be at least 0")
-    @Digits(integer = 17, fraction = 2, message = "Bank account balance must have up to 17 integer digits and 2 fractional digits")
+    @Digits(integer = 19, fraction = 2, message = "Bank account balance must have up to 19 integer digits and 2 fractional digits")
     private BigDecimal bankAccountBalance;
 }
