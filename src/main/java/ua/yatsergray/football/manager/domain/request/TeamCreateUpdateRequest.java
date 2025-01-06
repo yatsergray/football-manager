@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 @Builder
 public class TeamCreateUpdateRequest {
 

@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 @Builder
 public class TransferDTO {
     private BigDecimal totalCost;

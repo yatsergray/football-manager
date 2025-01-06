@@ -78,4 +78,12 @@ public class Transfer {
     public final int hashCode() {
         return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+                "id = " + id + ", " +
+                "totalCost = " + totalCost + ", " +
+                "date = " + date + ")";
+    }
 }

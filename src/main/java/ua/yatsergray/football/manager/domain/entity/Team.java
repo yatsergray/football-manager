@@ -59,4 +59,13 @@ public class Team {
     public final int hashCode() {
         return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+                "id = " + id + ", " +
+                "name = " + name + ", " +
+                "commissionPercentage = " + commissionPercentage + ", " +
+                "bankAccountBalance = " + bankAccountBalance + ")";
+    }
 }

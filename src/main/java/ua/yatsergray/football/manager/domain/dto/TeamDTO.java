@@ -12,6 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 @Builder
 public class TeamDTO {
     private UUID id;
