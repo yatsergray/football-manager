@@ -4,6 +4,6 @@
 
 ## Branches
 
-- Hibernate implementation branch - **[View the branch here](https://github.com/yatsergray/football-manager/tree/dev/add-crud-operations)**
+- Hibernate implementation branch - **[View the branch here](https://github.com/yatsergray/football-manager/tree/main)**
 
-- JDBC Template implementation branch - **[View the branch here](https://github.com/yatsergray/football-manager/tree/dev/add-transfer-operation)**
+- JDBC Template implementation branch - **[View the branch here](https://github.com/yatsergray/football-manager/tree/dev/add-jdbc-template)**
