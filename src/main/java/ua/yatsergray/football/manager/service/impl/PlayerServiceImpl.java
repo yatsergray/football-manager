@@ -1,7 +1,7 @@
 package ua.yatsergray.football.manager.service.impl;
 
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ua.yatsergray.football.manager.domain.dto.PlayerDTO;
 import ua.yatsergray.football.manager.domain.dto.TransferDTO;
@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Transactional
 @Service
 public class PlayerServiceImpl implements PlayerService {
     private final PlayerRepository playerRepository;
@@ -38,7 +37,7 @@ public class PlayerServiceImpl implements PlayerService {
     private final TransferMapper transferMapper;
 
     @Autowired
-    public PlayerServiceImpl(PlayerRepository playerRepository, TeamRepository teamRepository, TransferRepository transferRepository, PlayerMapper playerMapper, TransferMapper transferMapper) {
+    public PlayerServiceImpl(@Qualifier("playerRepositoryImpl") PlayerRepository playerRepository, @Qualifier("teamRepositoryImpl") TeamRepository teamRepository, @Qualifier("transferRepositoryImpl") TransferRepository transferRepository, PlayerMapper playerMapper, TransferMapper transferMapper) {
         this.playerRepository = playerRepository;
         this.teamRepository = teamRepository;
         this.transferRepository = transferRepository;
@@ -91,7 +90,7 @@ public class PlayerServiceImpl implements PlayerService {
             throw new NoSuchPlayerException(String.format("Player with id=\"%s\" does not exist", playerId));
         }
 
-        transferRepository.deleteAll(transferRepository.findAvailableToDeleteByPlayerId(playerId));
+        transferRepository.deleteAllAvailableToDeleteByPlayerId(playerId);
         playerRepository.deleteById(playerId);
     }
 
@@ -103,23 +102,38 @@ public class PlayerServiceImpl implements PlayerService {
         Team buyingTeam = teamRepository.findById(buyingTeamId)
                 .orElseThrow(() -> new NoSuchPlayerException(String.format("Team with id=\"%s\" does not exist", buyingTeamId)));
 
-        if (sellingTeam.equals(buyingTeam)) {
+        System.out.println(1);
+
+        if (sellingTeam.getId().equals(buyingTeam.getId())) {
             throw new PlayerConflictException(String.format("Player with id=\"%s\" already belongs to Team with id=\"%s\"", playerId, buyingTeamId));
         }
 
+        System.out.println(1);
+
         BigDecimal totalTransferCost = calculateTotalTransferCost(player.getMonthsOfExperience(), player.getAge(), buyingTeam.getCommissionPercentage());
+
+        System.out.println(3);
 
         if (buyingTeam.getBankAccountBalance().compareTo(totalTransferCost) < 0) {
             throw new InsufficientTeamBankAccountBalanceException(String.format("Team with id=\"%s\" does not have enough funds to buy Player with id=\"%s\"", buyingTeamId, playerId));
         }
 
+        System.out.println(4);
+
         buyingTeam.setBankAccountBalance(buyingTeam.getBankAccountBalance().subtract(totalTransferCost));
         sellingTeam.setBankAccountBalance(sellingTeam.getBankAccountBalance().add(totalTransferCost));
+
+        System.out.println(5);
 
         player.setTeam(buyingTeam);
 
         teamRepository.save(buyingTeam);
+
+        System.out.println(6);
+
         teamRepository.save(sellingTeam);
+
+        System.out.println(7);
 
         Transfer transfer = Transfer.builder()
                 .totalCost(totalTransferCost)
@@ -128,6 +142,8 @@ public class PlayerServiceImpl implements PlayerService {
                 .sellingTeam(sellingTeam)
                 .buyingTeam(buyingTeam)
                 .build();
+
+        System.out.println(8);
 
         return transferMapper.mapToTransferDTO(transferRepository.save(transfer));
     }

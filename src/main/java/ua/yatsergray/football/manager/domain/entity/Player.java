@@ -1,8 +1,6 @@
 package ua.yatsergray.football.manager.domain.entity;
 
-import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.proxy.HibernateProxy;
 
 import java.util.LinkedHashSet;
 import java.util.Objects;
@@ -14,57 +12,37 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
-@Entity
-@Table(name = "players")
 public class Player {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-
-    @Column(name = "first_name", nullable = false)
     private String firstName;
-
-    @Column(name = "last_name", nullable = false)
     private String lastName;
-
-    @Column(name = "age", nullable = false)
     private Integer age;
-
-    @Column(name = "months_of_experience", nullable = false)
     private Integer monthsOfExperience;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "team_id", nullable = false)
     private Team team;
 
-    @OneToMany(mappedBy = "player")
     @Builder.Default
     private Set<Transfer> transfers = new LinkedHashSet<>();
 
     @Override
-    public final boolean equals(Object o) {
+    public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null) return false;
-        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
-        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
-        if (thisEffectiveClass != oEffectiveClass) return false;
-        Player player = (Player) o;
-        return getId() != null && Objects.equals(getId(), player.getId());
+        if (!(o instanceof Player player)) return false;
+        return Objects.equals(id, player.id) && Objects.equals(firstName, player.firstName) && Objects.equals(lastName, player.lastName) && Objects.equals(age, player.age) && Objects.equals(monthsOfExperience, player.monthsOfExperience) && Objects.equals(team, player.team) && Objects.equals(transfers, player.transfers);
     }
 
     @Override
-    public final int hashCode() {
-        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, age, monthsOfExperience, team, transfers);
     }
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "id = " + id + ", " +
-                "firstName = " + firstName + ", " +
-                "lastName = " + lastName + ", " +
-                "age = " + age + ", " +
-                "monthsOfExperience = " + monthsOfExperience + ")";
+        return "Player{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", monthsOfExperience=" + monthsOfExperience +
+                '}';
     }
 }
